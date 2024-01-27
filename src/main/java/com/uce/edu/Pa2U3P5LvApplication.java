@@ -1,7 +1,5 @@
 package com.uce.edu;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,37 +24,34 @@ public class Pa2U3P5LvApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-//		Factura f1 = new Factura();
-//		f1.setCedula("12345");
-//		f1.setFecha(LocalDate.now());
-//		f1.setNumero("001-025");
-//		
-//		
-//		
-//		DetalleFactura det1 = new DetalleFactura();
-//		det1.setCantidad(4);
-//		det1.setCodigoBarras("544548454");
-//		det1.setFactura(f1);
-//		det1.setNombreProducto("cocaCola");
-//		
-//		DetalleFactura det2 = new DetalleFactura();
-//		det2.setCantidad(2);
-//		det2.setCodigoBarras("5457874872");
-//		det2.setFactura(f1);
-//		det2.setNombreProducto("Leche vita");
-//		List<DetalleFactura> detalle= new ArrayList<>();
-//		detalle.add(det1);
-//		detalle.add(det2);
-//		
-//		f1.setDetalleFactura(detalle);
-//	
-		//this.facturaService.guardar(f1);
-		
-		Factura factura = this.facturaService.buscarPorNumero("001-025");
-		for(DetalleFactura detalleFactura : factura.getDetalleFactura()) {
-			System.out.println(detalleFactura);
+
+		System.out.println("INNER JOIN");
+		List<Factura> lista = this.facturaService.buscarFacturaInnerJoin();
+		for(Factura f: lista) {
+			System.out.println(f);
 		}
-		System.out.println(factura);
+		
+		System.out.println("RIGHT JOIN");
+		List<Factura> lista2 = this.facturaService.buscarFacturasRightJoin();
+		for(Factura f: lista2) {
+			System.out.println(f.getNumero());
+		}
+		
+		System.out.println("LEFT JOIN");
+		List<Factura> lista3 = this.facturaService.buscarFacturasLeftJoin();
+		for(Factura f: lista3) {
+			System.out.println(f);
+		}
+		
+		System.out.println("FULL JOIN");
+		List<Factura> lista4 = this.facturaService.buscarFacturasFullJoin();
+		for(Factura f: lista4) {
+			System.out.println(f);
+			for(DetalleFactura d : f.getDetalleFactura()) {
+				System.out.println(d);
+			}
+		}
+		
 		
 	}
 

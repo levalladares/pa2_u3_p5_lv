@@ -74,7 +74,7 @@ public class DetalleFactura {
 	@Override
 	public String toString() {
 		return "DetalleFactura [id=" + id + ", cantidad=" + cantidad + ", codigoBarras=" + codigoBarras
-				+ ", nombreProducto=" + nombreProducto + ", factura=" + factura + "]";
+				+ ", nombreProducto=" + nombreProducto + "]";
 	}
 
 	
