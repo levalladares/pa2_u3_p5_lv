@@ -44,9 +44,9 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		String jpql="SELECT f FROM Factura f JOIN f.detalleFactura d";
 		TypedQuery<Factura> myQuery = this.entityManager.createQuery(jpql, Factura.class);
 		List<Factura> lista = myQuery.getResultList();
-		for(Factura f : lista) {
-			f.getDetalleFactura().size();
-		}
+//		for(Factura f : lista) {
+//			f.getDetalleFactura().size();
+//		}
 		return lista;
 	}
 
@@ -84,6 +84,27 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 			f.getDetalleFactura().size();
 		}
 		return lista;
+	}
+
+	@Override
+	public List<Factura> seleccionarFacturasWhereJoin() {
+		// TODO Auto-generated method stub
+		//jpql: SELECT f FROM Factura f, DetalleFactura d WHERE f= d.factura
+		String jpql="SELECT f FROM Factura f, DetalleFactura d WHERE f= d.factura";
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery(jpql, Factura.class);
+		List<Factura> lista = myQuery.getResultList();
+		for(Factura f : lista) {
+			f.getDetalleFactura().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Factura> seleccionarFacturasFetchJoin() {
+		// TODO Auto-generated method stub
+		String jpql="SELECT f FROM Factura f JOIN FETCH f.detalleFactura d";
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery(jpql, Factura.class);
+		return myQuery.getResultList();
 	}
 
 
