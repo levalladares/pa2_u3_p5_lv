@@ -1,13 +1,16 @@
 package com.uce.edu.demo.ventas.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.ventas.repository.modelo.Factura;
+import com.uce.edu.demo.ventas.repository.modelo.dto.FacturaDTO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
@@ -104,6 +107,48 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		// TODO Auto-generated method stub
 		String jpql="SELECT f FROM Factura f JOIN FETCH f.detalleFactura d";
 		TypedQuery<Factura> myQuery = this.entityManager.createQuery(jpql, Factura.class);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public void actualizar(Factura factura) {
+		// TODO Auto-generated method stub
+		this.entityManager.merge(factura);
+		
+	}
+
+	@Override
+	public void eliminar(Integer id) {
+		// TODO Auto-generated method stub
+		this.entityManager.remove(id);
+	}
+
+
+	@Override
+	public int eliminarPorNumero(String numero) {
+		// TODO Auto-generated method stub
+		String jpql="DELETE FROM Factura f WHERE f.numero= :numero";
+		Query myQuery = this.entityManager.createQuery(jpql);
+		myQuery.setParameter("numero", numero);
+		return myQuery.executeUpdate();
+	}
+
+	@Override
+	public int actualizarFechas(LocalDate fechaNueva, LocalDate fechaActual) {
+		// TODO Auto-generated method stub
+		String jpql="UPDATE Factura f SET f.fecha= :fechaNueva WHERE f.fecha >= :fechaActual";
+		Query myQuery = this.entityManager.createQuery(jpql);
+		myQuery.setParameter("fechaNueva", fechaNueva);
+		myQuery.setParameter("fechaActual", fechaActual);
+		return myQuery.executeUpdate();
+		
+	}
+
+	@Override
+	public List<FacturaDTO> seleccionarFacturasDTO() {
+		// TODO Auto-generated method stub
+		String jpql="SELECT NEW com.uce.edu.demo.ventas.repository.modelo.dto.FacturaDTO(f.numero, f.fecha) FROM Factura f";
+		TypedQuery<FacturaDTO> myQuery = this.entityManager.createQuery(jpql,FacturaDTO.class);
 		return myQuery.getResultList();
 	}
 

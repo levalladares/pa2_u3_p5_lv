@@ -30,7 +30,7 @@ public class Factura {
 	@Column(name = "fact_cedula")
 	private String cedula;
 	
-	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL)
 	private List<DetalleFactura> detalleFactura;
 	
 	
