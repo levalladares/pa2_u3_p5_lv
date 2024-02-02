@@ -1,6 +1,5 @@
 package com.uce.edu;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +7,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.ventas.repository.modelo.dto.FacturaDTO;
-import com.uce.edu.demo.ventas.service.IFacturaService;
+import com.uce.edu.demo.ventas.repository.modelo.Equipo;
+import com.uce.edu.demo.ventas.repository.modelo.Jugador;
+import com.uce.edu.demo.ventas.service.IEquipoService;
 
 @SpringBootApplication
 public class Pa2U3P5LvApplication implements CommandLineRunner {
 
 	@Autowired
-	private IFacturaService facturaService;
+	private IEquipoService equipoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U3P5LvApplication.class, args);
@@ -24,19 +24,67 @@ public class Pa2U3P5LvApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("UPDATE");
-		int cantidadActu =this.facturaService.actualizarFechas(LocalDate.of(2020, 01, 15), LocalDate.of(2024, 01, 25));
-		System.out.println("cantidad de registros actualizados: "+cantidadActu);
-		
-		System.out.println("DELETE");
-		int cantidadElim = this.facturaService.borrarPorNumero("04-45852");
-		System.out.println("cantidad de registros/filas eliminados: "+ cantidadElim);
-		
-		System.out.println("DTO");
-		List<FacturaDTO> listaDTO = this.facturaService.buscarFacturasDTO();
-		for(FacturaDTO f : listaDTO) {
-			System.out.println(f);
+
+		System.out.println("INNER JOIN");
+		List<Equipo> e1 = this.equipoService.buscarInnerJoin();
+		for(Equipo e : e1) {
+			System.out.println(e);
 		}
+		
+		List<Jugador> j1 = this.equipoService.buscarJugadoresInnerJoin();
+		for(Jugador j : j1) {
+			System.out.println(j);
+		}
+		
+		
+		System.out.println("RIGHT JOIN");
+		List<Equipo> e2 = this.equipoService.buscarRigthJoin();
+		for(Equipo e : e2) {
+			System.out.println(e);
+		}
+		
+		List<Jugador> j2 = this.equipoService.buscarJugadoresRigthJoin();
+		for(Jugador j : j2) {
+			System.out.println(j);
+		}
+		
+		System.out.println("LEFT JOIN");
+		List<Equipo> e3 = this.equipoService.buscarLeftJoin();
+		for(Equipo e : e3) {
+			System.out.println(e);
+		}
+		
+		List<Jugador> j3 = this.equipoService.buscarJugadoresLeftJoin();
+		for(Jugador j : j3) {
+			System.out.println(j);
+		}
+		
+		System.out.println("FULL JOIN");
+		List<Equipo> e4 = this.equipoService.buscarFullJoin();
+		for(Equipo e : e4) {
+			System.out.println(e);
+		}
+		
+		List<Jugador> j4 = this.equipoService.buscarJugadoresFullJoin();
+		for(Jugador j : j4) {
+			System.out.println(j);
+		}
+		
+		System.out.println("JOIN FETCH");
+		List<Equipo> e5 = this.equipoService.buscarFetchJoin();
+		for(Equipo e : e5) {
+			System.out.println(e);
+		}
+		
+		List<Equipo> j5 = this.equipoService.buscarJugadoresFetchJoin();
+		for(Equipo j : j5) {
+			System.out.println(j);
+		}
+		
+		
+		
+		
+		
 
 	}
 
