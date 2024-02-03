@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.reactive.TransactionSynchronizationManager;
 
 import com.uce.edu.demo.ventas.repository.modelo.Factura;
 import com.uce.edu.demo.ventas.repository.modelo.dto.FacturaDTO;
@@ -13,6 +14,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional.TxType;
 
 @Repository
 @Transactional
