@@ -92,4 +92,13 @@ public class FacturaServiceImpl implements IFacturaService {
 		return this.facturaRepository.seleccionarFacturasDTO();
 	}
 
+	@Override
+	@Transactional(value = TxType.MANDATORY)
+	public void prueba() {
+		// TODO Auto-generated method stub
+		System.out.println("este metodo es de prueba");
+		System.out.println("Prueba: "+org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
+
+	}
+
 }

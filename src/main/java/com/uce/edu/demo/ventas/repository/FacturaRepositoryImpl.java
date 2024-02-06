@@ -36,6 +36,7 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 	}
 
 	@Override
+	@Transactional(value = TxType.MANDATORY)
 	public void insertar(Factura factura) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(factura);
@@ -113,6 +114,7 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 	}
 
 	@Override
+	@Transactional(value = TxType.MANDATORY)
 	public void actualizar(Factura factura) {
 		// TODO Auto-generated method stub
 		this.entityManager.merge(factura);
@@ -120,6 +122,7 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 	}
 
 	@Override
+	@Transactional(value = TxType.MANDATORY)
 	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
 		this.entityManager.remove(id);

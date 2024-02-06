@@ -21,6 +21,7 @@ public interface IFacturaService {
 	public int actualizarFechas (LocalDate fechaNueva, LocalDate fechaActual);
 	public int borrarPorNumero(String numero);
 	public List<FacturaDTO> buscarFacturasDTO();
+	public void prueba();
 
 	
 }
