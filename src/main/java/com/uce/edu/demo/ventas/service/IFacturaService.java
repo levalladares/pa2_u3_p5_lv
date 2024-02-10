@@ -22,6 +22,8 @@ public interface IFacturaService {
 	public int borrarPorNumero(String numero);
 	public List<FacturaDTO> buscarFacturasDTO();
 	public void prueba();
+	public void pruebaSupport();
+	public void pruebaNever();
 
 	
 }

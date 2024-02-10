@@ -28,22 +28,9 @@ public class Pa2U3P5LvApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
-		Factura fact = new Factura();
-		fact.setCedula("123123");
-		fact.setFecha(LocalDate.now());
-		fact.setNumero("001-002");
-		
-		Cliente cli = new Cliente();
-		cli.setNombre("Jose");
-		cli.setApellido("AAA");
-		
-		//this.facturaService.guardar(fact, cli);
-		
-		System.out.println("main: "+org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
 
-		this.facturaService.prueba();
-		
+		//this.facturaService.pruebaSupport();
+		//this.facturaService.pruebaNever();
 	}
 
 }

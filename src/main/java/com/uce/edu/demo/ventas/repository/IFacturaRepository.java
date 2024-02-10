@@ -33,6 +33,6 @@ public interface IFacturaRepository {
 	
 	public int actualizarFechas (LocalDate fechaNueva, LocalDate fechaActual);
 	
-	
+	public List<Factura> seleccionarTodos();
 
 }

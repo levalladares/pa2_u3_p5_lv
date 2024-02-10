@@ -23,4 +23,21 @@ public class ClienteServiceImpl implements IClienteService{
 		this.clienteRepository.insertar(cliente);
 	}
 
+	@Override
+	@Transactional(value = TxType.SUPPORTS)
+	public void pruebaSupports() {
+		// TODO Auto-generated method stub
+		System.out.println("este es un metodo supports");
+		System.out.println("Prueba supports"+org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
+	}
+
+	@Override
+	@Transactional(value = TxType.NEVER)
+	public void pruebaNever() {
+		// TODO Auto-generated method stub
+		System.out.println("este es un metodo never");
+		System.out.println("Prueba never: "+org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
+
+	}
+
 }

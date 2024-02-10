@@ -1,5 +1,6 @@
 package com.uce.edu.demo.ventas.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class FacturaServiceImpl implements IFacturaService {
 	private IFacturaRepository facturaRepository;
 	@Autowired
 	private IClienteRepository clienteRepository;
+	@Autowired
+	private IClienteService clienteService;
 
 	@Override
 	public Factura buscarPorNumero(String numero) {
@@ -33,6 +36,10 @@ public class FacturaServiceImpl implements IFacturaService {
 	@Transactional(value = TxType.REQUIRED)
 	public void guardar(Factura factura, Cliente cliente) {
 		// TODO Auto-generated method stub
+		BigDecimal valor= new BigDecimal(100);
+		valor= valor.multiply(new BigDecimal(0.12));
+		factura.setValorIVA(valor);
+		
 		System.out.println(org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
 		this.facturaRepository.insertar(factura);
 		this.clienteRepository.insertar(cliente);
@@ -101,4 +108,22 @@ public class FacturaServiceImpl implements IFacturaService {
 
 	}
 
+	@Override
+
+	public void pruebaSupport() {
+		// TODO Auto-generated method stub
+		System.out.println("Prueba Factura: "+org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
+		this.clienteService.pruebaSupports();
+	}
+
+	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
+	public void pruebaNever() {
+		// TODO Auto-generated method stub
+		System.out.println("Prueba Factura: "+org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
+		this.clienteService.pruebaNever();
+	}
+	
+	
+	
 }

@@ -123,6 +123,7 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 
 	@Override
 	@Transactional(value = TxType.MANDATORY)
+	
 	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
 		this.entityManager.remove(id);
@@ -154,6 +155,14 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		// TODO Auto-generated method stub
 		String jpql="SELECT NEW com.uce.edu.demo.ventas.repository.modelo.dto.FacturaDTO(f.numero, f.fecha) FROM Factura f";
 		TypedQuery<FacturaDTO> myQuery = this.entityManager.createQuery(jpql,FacturaDTO.class);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
+	public List<Factura> seleccionarTodos() {
+		// TODO Auto-generated method stub
+		TypedQuery<Factura> myQuery= this.entityManager.createQuery("SELECT f FROM Factura f",Factura.class);
 		return myQuery.getResultList();
 	}
 
