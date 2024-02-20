@@ -1,5 +1,7 @@
 package com.uce.edu.demo.ventas.service;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,15 @@ public class ClienteServiceImpl implements IClienteService{
 	@Transactional(value = TxType.REQUIRES_NEW)
 	public void guardar(Cliente cliente) {
 		// TODO Auto-generated method stub
-		System.out.println();
+		System.out.println("Nombre Hilo: "+Thread.currentThread().getName());
 		this.clienteRepository.insertar(cliente);
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
