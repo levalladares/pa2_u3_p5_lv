@@ -1,8 +1,9 @@
 package com.uce.edu.demo.funcional;
 
-import java.util.function.IntUnaryOperator;
-
-import org.aspectj.weaver.IUnwovenClassFile;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -136,6 +137,72 @@ public class Main {
 		IPersonaUnaryOperatorFunction<Empleado> unary3 = met ::procesar;
 		Empleado emp3=unary3.aplicar(emp2);
 		System.out.println(emp3);
+		
+		
+		
+		System.out.println();
+		System.out.println("************ IMPLEMENTACION DE INTERFACES FUNCIONALES MEDIANTE LIBRERIAS JAVA ************");
+		//1.SUPPLIER
+		System.out.println("SUPPLIER JAVA");
+		Stream<String> lista = Stream.generate(() -> "54321" + "pais").limit(20);
+		lista.forEach(cadena->System.out.println(cadena));
+		
+		//2. CONSUMER
+		System.out.println("CONSUMER JAVA");
+		List<Integer> listaNumeros = Arrays.asList(1,2,3,4,5,6,11,58);
+		listaNumeros.forEach(numero -> {
+			System.out.println("Se inserta");
+			System.out.println(numero);
+		});
+		
+//		for(Integer numero : lista2 ) {
+//			System.out.println("Se inserta");
+//			System.out.println(numero);
+//		}
+		
+		//3.PREDICATE
+		System.out.println("PREDICATE JAVA");
+		Stream<Integer> listaFiltrada=listaNumeros.stream().filter( numero -> numero >=10);
+		listaFiltrada.forEach(numero ->System.out.println(numero));
+		
+		//4. FUNCTION
+		System.out.println("FUNCTION JAVA");
+		Stream<String> listaCambiada = listaNumeros.stream().map(numero ->{
+			numero = numero*100/50;
+			return "num: "+numero.toString();
+		} );
+		listaCambiada.forEach(cadena-> System.out.println(cadena));
+		//ejemplo2
+		Ciudadano ciud1= new Ciudadano();
+		ciud1.setNombre("Luis");
+		ciud1.setApellido("Valladares");
+		ciud1.setProvincia("pichincha");
+		Ciudadano ciud02= new Ciudadano();
+		ciud02.setNombre("Ernesto");
+		ciud02.setApellido("Bastidas");
+		ciud02.setProvincia("pichincha");
+		Ciudadano ciud03= new Ciudadano();
+		ciud03.setNombre("Viviana");
+		ciud03.setApellido("Jacome");
+		ciud03.setProvincia("pichincha");
+		List<Ciudadano> listaCiudadanos = Arrays.asList(ciud1,ciud02,ciud03);
+		Stream<Empleado> listaEmpleado = listaCiudadanos.stream().map(ciudadano -> {
+			Empleado empl01 = new Empleado();
+			empl01.setNombreCompleto(ciudadano.getNombre()+" "+ciudadano.getApellido());;
+			if(ciudadano.getProvincia().compareTo("pichincha")==0) {
+				empl01.setPais("Ecuador");
+			}
+			return empl01;
+		});
+		listaEmpleado.forEach(empleado -> System.out.println(empleado));
+		
+		//5. Unary Operator
+		System.out.println("UNARY OPERATOR JAVA");
+		Stream<Integer> listaNumeros2 = listaNumeros.stream().map(numero ->{
+			numero = numero*100/50;
+			return numero;
+		} );
+		listaNumeros2.forEach(numero-> System.out.println(numero));
 		
 		
 		
